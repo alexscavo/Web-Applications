@@ -336,8 +336,6 @@ export function FilmLibrary(){
 
         return new Promise((res, rej) => {
 
-            console.log(filmId, rating);
-
             const query = 'UPDATE films SET rating = ? WHERE id = ?';
 
             db1.run(query, [rating, filmId], function (err) {
@@ -352,14 +350,15 @@ export function FilmLibrary(){
     }
 
     //segna un film come favourite o non favourite
-    this.updateFav = (filmId, fav) => {
-        return new Promise((res, rej) => {
+    this.updateFav = (filmId, fav = 0) => {
 
-            console.log(filmId, rating);
+        console.log(fav);
+
+        return new Promise((res, rej) => {
 
             const query = 'UPDATE films SET isFavorite = ? WHERE id = ?';
 
-            db1.run(query, [rating, filmId], function (err) {
+            db1.run(query, [fav, filmId], function (err) {
                 if(err)
                     rej(err);
                 else{

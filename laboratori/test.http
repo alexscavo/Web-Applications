@@ -30,3 +30,11 @@ content-type: application/json
 PATCH http://localhost:3001/api/films/3?rating=2
 
 ###
+
+PATCH http://localhost:3001/api/films/3?favourite=1
+
+###
+
+PATCH http://localhost:3001/api/films/1?favourite=0
+
+###

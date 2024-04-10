@@ -144,22 +144,41 @@ app.put('/api/films/:filmId', [
 // PATCH /api/films/<filmId>
 app.patch('/api/films/:filmId', async (req, res) => {
 
-    const new_rat = req.query.rating;
     const filmId = req.params.filmId;
 
-    console.log("Server.mjs: " + filmId);
+    switch(Object.keys(req.query)[0]) {
+        case "rating":
+            const new_rat = req.query.rating;
+            try{
+                await filmLib.updateRating(filmId, new_rat);
+                res.status(200).end();
+            }
+            catch(e) {
+                console.error(`Error: ${e.message}`);
+                res.status(500).json({'error': `Impossibile to update the rating for the film ${filmId}`});
+            }
+            break;
+        
+        case "favourite":
+            const fav = req.query.favourite;
+            
+            try{
+                await filmLib.updateFav(filmId, fav);
+                res.status(200).end();
+            }
+            catch(e) {
+                console.error(`Error: ${e.message}`);
+                res.status(500).json({'error': `Impossibile to update favourite status of the film ${filmId}`});
+            }
+    }
 
-    try{
-        await filmLib.updateRating(filmId, new_rat);
-        res.status(200).end();
-    }
-    catch(e) {
-        console.error(`Error: ${e.message}`);
-        resolve.status(500).json({'error': `Impossibile to update the rating for the film ${filmId}`});
-    }
+    
+    
+
+
+    
 });
 
-// PATCH /api/films/<filmId>
 
 
 //avvio server
