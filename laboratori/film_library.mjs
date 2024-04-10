@@ -325,10 +325,48 @@ export function FilmLibrary(){
                 if(err)
                     reject(err);
                 else{
-                    console.log('Tutto ok');
                     resolve(this.lastID);
                 }
             });
+        });
+    }
+
+    //aggiorna il rating di uno specifico film
+    this.updateRating = (filmId, rating) => {
+
+        return new Promise((res, rej) => {
+
+            console.log(filmId, rating);
+
+            const query = 'UPDATE films SET rating = ? WHERE id = ?';
+
+            db1.run(query, [rating, filmId], function (err) {
+                if(err)
+                    rej(err);
+                else{
+                    res();
+                }
+            });
+            
+        });
+    }
+
+    //segna un film come favourite o non favourite
+    this.updateFav = (filmId, fav) => {
+        return new Promise((res, rej) => {
+
+            console.log(filmId, rating);
+
+            const query = 'UPDATE films SET isFavorite = ? WHERE id = ?';
+
+            db1.run(query, [rating, filmId], function (err) {
+                if(err)
+                    rej(err);
+                else{
+                    res();
+                }
+            });
+            
         });
     }
 

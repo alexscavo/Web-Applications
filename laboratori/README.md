@@ -203,26 +203,22 @@ Response body:
 __None__
 
 
-### __Create a new film__
+### __Update a specific film rating__
 
-URL: `/api/films`
+URL: `/api/films/<filmId>`
 
-HTTP Method: POST.
+HTTP Method: PATCH.
 
-Description: Retrieve all the unseen films.
+Description: Update the rating of a specific film.
 
 Request body:
 ```
 {
-  "title": "21 Grams",
-  "isFavourite": "1",
-  "rating": "4",
-  "watchDate": "2024-03-17",
-  "userId": "1"
+  "rating": 4
 }
 ```
 
-Response: `201 Created` (success with the created Id) or `500 Internal Server Error` (generic error) or `503 Service Unavailable` (generic error). If the request body is not valid, `422 Unprocessable Entity` (avlidation error).
+Response: `200 OK` (success) or `500 Service Unavailable` (generic error) OR `404 Not Found` (wrong id).
 
 Response body:
 __None__

@@ -27,3 +27,6 @@ content-type: application/json
 }
 
 ###
+PATCH http://localhost:3001/api/films/3?rating=2
+
+###

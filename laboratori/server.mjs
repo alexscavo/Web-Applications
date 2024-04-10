@@ -141,5 +141,26 @@ app.put('/api/films/:filmId', [
 });
 
 
+// PATCH /api/films/<filmId>
+app.patch('/api/films/:filmId', async (req, res) => {
+
+    const new_rat = req.query.rating;
+    const filmId = req.params.filmId;
+
+    console.log("Server.mjs: " + filmId);
+
+    try{
+        await filmLib.updateRating(filmId, new_rat);
+        res.status(200).end();
+    }
+    catch(e) {
+        console.error(`Error: ${e.message}`);
+        resolve.status(500).json({'error': `Impossibile to update the rating for the film ${filmId}`});
+    }
+});
+
+// PATCH /api/films/<filmId>
+
+
 //avvio server
 app.listen(port, () => 'API server started!');
