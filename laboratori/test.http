@@ -1,0 +1,29 @@
+POST http://localhost:3001/api/films
+content-type: application/json
+
+{
+    "title": "Harry Potter",
+    "isFavourite": 1,
+    "rating": 5,
+    "watchDate": "2024-03-10",
+    "userId": 3
+}
+
+###
+
+GET http://localhost:3001/api/films/2
+
+###
+
+PUT http://localhost:3001/api/films/2
+content-type: application/json
+
+{
+    "title": "Matrix",
+    "isFavourite": 0,
+    "rating": 1,
+    "watchDate": "2020-10-25",
+    "userId": 2
+}
+
+###

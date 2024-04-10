@@ -1,0 +1,14 @@
+{
+  "name": "applicazioni-web",
+  "version": "0.0.1",
+  "description": "Esercizio sui metodi funzionali",
+  "main": "example.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alessandro Scavone",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.10"
+  }
+}
