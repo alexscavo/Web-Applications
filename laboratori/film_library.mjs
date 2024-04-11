@@ -352,8 +352,6 @@ export function FilmLibrary(){
     //segna un film come favourite o non favourite
     this.updateFav = (filmId, fav = 0) => {
 
-        console.log(fav);
-
         return new Promise((res, rej) => {
 
             const query = 'UPDATE films SET isFavorite = ? WHERE id = ?';
@@ -366,6 +364,21 @@ export function FilmLibrary(){
                 }
             });
             
+        });
+    }
+
+    this.deleteFilmDB = (filmId) => {
+
+        return new Promise((res, rej) => {
+           
+            const query = 'DELETE FROM films WHERE id = ?';
+            
+            db1.run(query, [filmId], function (err) {
+                if(err)
+                    rej(err);
+                else
+                    res(res);
+            });
         });
     }
 

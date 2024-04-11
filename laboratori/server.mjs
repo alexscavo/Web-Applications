@@ -141,42 +141,87 @@ app.put('/api/films/:filmId', [
 });
 
 
-// PATCH /api/films/<filmId>
-app.patch('/api/films/:filmId', async (req, res) => {
+// PATCH /api/films/<filmId>/favourite
+app.patch('/api/films/:id/favourite',
+    [
+        check('favourite').isNumeric(),
+    ],
+    async (req, res) => {
+        const invalidFields = validationResult(req);
+
+        if (!invalidFields.isEmpty()) {
+            return res.status(422).json({invalidFields: invalidFields.array()});
+        }
+
+        try {
+            
+            const film = await filmLib.getFilm(req.params.id);
+            if (film.error)
+                return res.status(404).json(film);
+            film.favorite = req.body.favorite;  // update favorite property
+            const result = await filmLib.updateFav(film.filmId, req.body.favourite);
+            return res.json(result);
+        } catch (err) {
+            res.status(503).json({error: `Database error during the favorite update of film ${req.params.id}`});
+        }
+});
+
+// PATCH /api/films/:id/rating
+app.patch('/api/films/:id/rating',
+    [
+        check('rating').optional({nullable: true}).isInt({min: 1, max: 5}),
+    ],
+    async (req, res) => {
+        const invalidFields = validationResult(req);
+
+        if (!invalidFields.isEmpty()) {
+            return res.status(422).json({invalidFields: invalidFields.array()});
+        }
+
+        try {
+            const film = await filmLib.getFilm(req.params.id);
+            if (film.error)
+                return res.status(404).json(film);
+            // update favorite property
+            film.rating = req.body.rating || null;  // if req.body.rating is falsy, null is assigned
+            const result = await filmLib.updateRating(film.filmId, req.body.rating);
+            return res.json(result);
+        } catch (err) {
+            res.status(503).json({error: `Database error during the rating update of film ${req.params.id}`});
+        }
+    }
+);
+
+
+// 7. Delete an existing film, given its “id”
+// DELETE /api/films/<id>
+// Given a film id, this route deletes the associated film from the library.
+app.delete('/api/films/:id',
+    async (req, res) => {
+        try {
+            // NOTE: if there is no film with the specified id, the delete operation is considered successful.
+            await filmDao.deleteFilm(req.params.id);
+            res.status(200).end();
+        } catch (err) {
+            res.status(503).json({error: `Database error during the deletion of film ${req.params.id}: ${err} `});
+        }
+    }
+);
+
+
+// PUT /api/films/:filmId
+app.delete('/api/films/:filmId', async(req, res) => {
 
     const filmId = req.params.filmId;
 
-    switch(Object.keys(req.query)[0]) {
-        case "rating":
-            const new_rat = req.query.rating;
-            try{
-                await filmLib.updateRating(filmId, new_rat);
-                res.status(200).end();
-            }
-            catch(e) {
-                console.error(`Error: ${e.message}`);
-                res.status(500).json({'error': `Impossibile to update the rating for the film ${filmId}`});
-            }
-            break;
-        
-        case "favourite":
-            const fav = req.query.favourite;
-            
-            try{
-                await filmLib.updateFav(filmId, fav);
-                res.status(200).end();
-            }
-            catch(e) {
-                console.error(`Error: ${e.message}`);
-                res.status(500).json({'error': `Impossibile to update favourite status of the film ${filmId}`});
-            }
+    try{
+        await filmLib.deleteFilmDB(filmId);
+        res.status(200).end();
     }
-
-    
-    
-
-
-    
+    catch(e) {
+        console.error(`Error: ${e.message}`);
+        res.status(500).json({'error': `Impossible to delete film ${filmId}`});
+    }
 });
 
 
