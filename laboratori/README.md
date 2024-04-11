@@ -211,12 +211,20 @@ HTTP Method: PATCH.
 
 Description: Update the rating of a specific film.
 
-Request body:
-```
-{
-  "rating": 4
-}
-```
+
+Response: `200 OK` (success) or `500 Service Unavailable` (generic error) OR `404 Not Found` (wrong id).
+
+Response body:
+__None__
+
+### __Mark a film as favourite/unfavourite__
+
+URL: `/api/films/<filmId>`
+
+HTTP Method: PATCH.
+
+Description: Update the isFavourite field of a specific film.
+
 
 Response: `200 OK` (success) or `500 Service Unavailable` (generic error) OR `404 Not Found` (wrong id).
 
