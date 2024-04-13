@@ -1,3 +1,8 @@
 .list-group-item.active{
     background-color: #125B9A;
 }
+
+#filter-table{
+    /*border: 1px solid red;*/
+    border-spacing: 0 10px;
+}
