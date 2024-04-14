@@ -2,7 +2,7 @@
     background-color: #125B9A;
 }
 
-#filter-table{
+.filter-table{
     /*border: 1px solid red;*/
-    border-spacing: 0 10px;
+    border-spacing: 30px 30px;
 }
