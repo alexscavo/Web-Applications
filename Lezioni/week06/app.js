@@ -92,8 +92,17 @@ function createAnswerRow(answer) {
 
     return tr;
 
-}
+}   
 
+
+function addSortListener(answers) {
+    const sortScoreIcon = document.getElementById('sort-score');
+
+    sortScoreIcon.addEventListener('click', event => {
+        const sortedAnswers = [...answers].sort((a, b) => a.score - b.score);
+        fillAnswersTable(sortedAnswers);
+    });
+}
 
 
 function fillAnswersTable(answers) {
@@ -101,6 +110,7 @@ function fillAnswersTable(answers) {
     const answerTable = document.getElementById('answers-table');
     //const answerTable = document.querySelector('#answer-table');
     
+    answerTable.innerHTML = "";
 
     for(const answer of answers) {
         const trAnswer = createAnswerRow(answer);
@@ -117,6 +127,8 @@ function main() {
     const answers = question.getAnswers();
 
     fillAnswersTable(answers);
+
+    addSortListener(answers);
 
     //console.log(answers)
 }
