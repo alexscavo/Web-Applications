@@ -1,5 +1,7 @@
+'use strict';
 
-function Answer(text, username, date, score = 0){ //per score ho un valore di default = 0
+function Answer(id, text, username, date, score = 0){ //per score ho un valore di default = 0
+    this.id = id;
     this.text = text;
     this.username = username;
     this.score = score;
@@ -27,10 +29,10 @@ function Question(id, text, email, date){
 
     this.init = () => {
         this.answers = [
-            new Answer('Yes', 'Luca Mannella', '2024-02-28', -10),
-            new Answer('Not in a million year', 'Guido van Rossum', '2024-03-01', 5),
-            new Answer('No', 'Albert Einstein', '2024-03-11'),
-            new Answer('Then, I don\'t know', 'Luca Mannella', '2024-03-10')
+            new Answer(1, 'Yes', 'Luca Mannella', '2024-02-28', -10),
+            new Answer(2, 'Not in a million year', 'Guido van Rossum', '2024-03-01', 5),
+            new Answer(3, 'No', 'Albert Einstein', '2024-03-11'),
+            new Answer(4, 'Then, I don\'t know', 'Luca Mannella', '2024-03-10')
         ]
     }
 }
@@ -40,7 +42,6 @@ function createAnswerRow(answer) {
     const tr = document.createElement('tr');    // gli dico cosa voglio creare
 
     tr.setAttribute('id', `answer-${answer.id}`);
-    console.log(tr);
 
 
     const tdDate = document.createElement('td');
@@ -67,6 +68,10 @@ function createAnswerRow(answer) {
         buttonVote.innerHTML = "<i class = 'bi bi-arrow-up'></i>"
         tdAction.appendChild(buttonVote);
 
+        buttonVote.addEventListener('click', event => {
+            tdScore.innerText = Number(tdScore.innerText) + 1;
+        });
+
         const buttonEdit = document.createElement('button');
         buttonEdit.classList.add('btn', 'btn-primary', 'mx-1');
         buttonEdit.innerHTML = "<i class = 'bi bi-pencil-square'></i>"
@@ -76,6 +81,12 @@ function createAnswerRow(answer) {
         buttonDelete.classList.add('btn', 'btn-danger');
         buttonDelete.innerHTML = "<i class = 'bi bi-trash'></i>"
         tdAction.appendChild(buttonDelete);
+
+        buttonDelete.addEventListener('click', event => {
+            console.log(event.currentTarget.parentElement.parentElement.id);
+            tr.remove();
+        });
+
     tr.appendChild(tdAction);
     
 
@@ -89,7 +100,7 @@ function fillAnswersTable(answers) {
 
     const answerTable = document.getElementById('answers-table');
     //const answerTable = document.querySelector('#answer-table');
-    console.log(answerTable);
+    
 
     for(const answer of answers) {
         const trAnswer = createAnswerRow(answer);
