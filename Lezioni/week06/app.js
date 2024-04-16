@@ -1,5 +1,7 @@
 'use strict';
 
+let sortingOrder = "asc";
+
 function Answer(id, text, username, date, score = 0){ //per score ho un valore di default = 0
     this.id = id;
     this.text = text;
@@ -99,7 +101,16 @@ function addSortListener(answers) {
     const sortScoreIcon = document.getElementById('sort-score');
 
     sortScoreIcon.addEventListener('click', event => {
-        const sortedAnswers = [...answers].sort((a, b) => a.score - b.score);
+        const sortedAnswers = [...answers];
+
+        if(sortingOrder === "asc"){
+            sortedAnswers.sort((a, b) => a.score - b.score);
+            sortingOrder = "dsc";
+        }
+        else{
+            sortedAnswers.sort((a, b) => b.score - a.score);
+            sortingOrder = "asc";
+        }
         fillAnswersTable(sortedAnswers);
     });
 }
