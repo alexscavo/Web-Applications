@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+//import dayjs from 'dayjs';
 import sqlite from 'sqlite3';
 
 //films copt è quello originale
@@ -29,7 +29,6 @@ export function Film(title, fav, userId, date = '', rating = 0, id = -1){ //rati
     this.toString = () => {
         return `FilmId: ${this.filmId},  Title: ${this.title},  Favourite: ${this.fav},  Date: ${this.date.format('YYYY-MM-DD')},  Score:${this.rating},  User:${this.userId}\n`;
     }
-
 }
 
 export function FilmLibrary(){
