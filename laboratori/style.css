@@ -1,3 +1,21 @@
 .list-group-item.active{
     background-color: #125B9A;
 }
+
+.btn:disabled {
+    outline: none; /* Remove default focus outline */
+    pointer-events: none; /* Disable pointer events */
+    opacity: 0.6; /* Optionally reduce opacity to indicate it's disabled */
+    border-color: transparent;
+}
+
+.list-group-item{
+    border-radius: 10px; /* Adjust the value as needed */
+    border-bottom-width: 0px !important;
+}
+
+.list-group {
+    border-radius: 10px; /* Adjust the value as needed */
+    border-bottom-width: 0px !important;
+}
+

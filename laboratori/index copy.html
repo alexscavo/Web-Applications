@@ -46,129 +46,25 @@
 
             <div class = "row">
                 <div class = "col-3">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item active">All</li>
-                        <li class="list-group-item">Favourites</li>
-                        <li class="list-group-item">Best Rated</li>
-                        <li class="list-group-item">Seen Last Month</li>
-                        <li class="list-group-item">Unseen</li>
+                    <ul class="list-group list-group-flush" id = "select-filter-list">
+                        <!--
+                        <li class="list-group-item" id = "all">All</li>
+                        <li class="list-group-item" id = "favourites">Favourites</li>
+                        <li class="list-group-item" id = "rating">Best Rated</li>
+                        <li class="list-group-item" id = "last-month">Seen Last Month</li>
+                        <li class="list-group-item" id = "unseen">Unseen</li>
+                        -->
                     </ul>
                 </div>
 
                     
                 <div class="col-9">
-                    <h1 class = "current-filter">All</h1>  <!---Indica il filtro attualmente in uso-->
+                    <h1 class = "current-filter" id = "selected-filter-title">All</h1>  <!---Indica il filtro attualmente in uso-->
                 
                     <div class="table-responsive">
                         <table class="table">   <!---Lista di film selezionati dal filtro-->
                             <tbody id = "filter-table">
-                                <!--
-                                <tr class = "filtered-table-row">
-                                    <td>Pulp Fiction</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="" aria-label="..." disabled checked>
-                                        Favourite
-                                    </td>
-                                    <td style = "width: 10%;"></td>
-                                    <td>March 10, 2023</td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pen"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-
-                                <tr class = "filtered-table-row py-5">
-                                    <td>21 Grams</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="" aria-label="..." disabled checked>
-                                        Favourite
-                                    </td>
-                                    <td style = "width: 10%;"></td>
-                                    <td>March 17, 2023</td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pen"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                
-                                <tr class = "filtered-table-row">
-                                    <td>Star Wars</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="" aria-label="..." disabled>
-                                        Favourite
-                                    </td>
-                                    <td style = "width: 10%;"></td>
-                                    <td></td>
-                                    <td>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pen"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-
-                                <tr class = "filtered-table-row">
-                                    <td>Matrix</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="" aria-label="..." disabled>
-                                        Favourite
-                                    </td>
-                                    <td style = "width: 10%;"></td>
-                                    <td></td>
-                                    <td>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pen"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-
-                                <tr class = "filtered-table-row">
-                                    <td>Shrek</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="" aria-label="..." disabled>
-                                        Favourite
-                                    </td>
-                                    <td style = "width: 10%;"></td>
-                                    <td>March 21, 2023</td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pen"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
                             </tbody>
-                            -->
                         </table>
                     </div>
                 </div>

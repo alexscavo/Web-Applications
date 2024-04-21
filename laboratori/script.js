@@ -88,7 +88,14 @@ function FilmLibrary(){
     }
 }
 
-
+//list of possible filters
+const listItemsData = [
+    "All",
+    "Favourites",
+    "Best Rated",
+    "Seen Last Month",
+    "Unseen"
+];
 
 
 
@@ -103,46 +110,126 @@ function FilmLibrary(){
 */
 
 
-function createFilmRow(film) {
+function createFilmRow(film) {  // crea una riga contenente il film
 
     const tr = document.createElement('tr');    //creo una table row
 
     tr.setAttribute('id', `film-${film.filmId}`);   //serve per identificare il film 
 
-    const tdTitle = document.createElement('td');   //creo un td per il titolo
+    /*---TITOLO---*/
+    const tdTitle = document.createElement('td');   
     tdTitle.innerText = film.title;
     tr.appendChild(tdTitle);
 
-    const tdFavourite = document.createElement('td');   //creo un td per il titolo
-    tdFavourite.innerText = 'Favourite';
-    tr.appendChild(tdFavourite);
+    /*---FAVOURITE---*/
+    const checkboxFav = document.createElement('td');   
+    if(film.fav == 1)
+        checkboxFav.innerHTML = '<input class="form-check-input" type="checkbox" value="" aria-label="..." checked disabled> Favourite';
+    else
+        checkboxFav.innerHTML = '<input class="form-check-input" type="checkbox" value="" aria-label="..." disabled> Favourite';
+    tr.appendChild(checkboxFav);
 
-    const tdDate = document.createElement('td');   //creo un td per il titolo
+    /*---DATE---*/
+    const tdDate = document.createElement('td');   
     if(!dayjs(film.date).isValid())
         tdDate.innerText = '';
     else
         tdDate.innerText = film.date;
     tr.appendChild(tdDate);
 
-    
+    /*---RATING---*/
+    const tdRating = document.createElement('td');  // creo td per le stelline del rating
+
+        for(let i=0; i<film.rating; i++){
+            const iStarFill = document.createElement('i');
+            iStarFill.classList.add('bi', 'bi-star-fill');
+            tdRating.appendChild(iStarFill);
+        }
+
+        for(let i=0; i<5-film.rating; i++){
+            const iStarEmpty = document.createElement('i');
+            iStarEmpty.classList.add('bi', 'bi-star');
+            tdRating.appendChild(iStarEmpty);
+        }
+    tr.appendChild(tdRating);
+
+    /*---BUTTONS---*/
+    const tdButtons = document.createElement('td');
+        const buttonModify = document.createElement('button');
+        buttonModify.classList.add('btn');
+        buttonModify.setAttribute('data-bs-toggle', 'button');
+        buttonModify.setAttribute('disabled', 'true');
+        buttonModify.innerHTML = '<i class="bi bi-pen"></i>';
+        tdButtons.appendChild(buttonModify);
+
+        const buttonDelete = document.createElement('button');
+        buttonDelete.classList.add('btn');
+        buttonDelete.setAttribute('data-bs-toggle', 'button');
+        buttonDelete.innerHTML = '<i class="bi bi-trash"></i>';
+        tdButtons.appendChild(buttonDelete);
+
+        buttonDelete.addEventListener('click', event => {   // quando viene cliccato elimina la riga corrispondente
+            tr.remove();
+        });
+
+    tr.appendChild(tdButtons);
+
+
 
     return tr;
 }
 
-function fillFilmLibraryTable(filmLib) {
+function fillFilmLibraryTable(filmList) {    // data una lista di film crea la tabella contenente i film
 
     const filmTable = document.getElementById('filter-table');
 
-    let films = filmLib.getFilms();
+    let films = filmList.getFilms();
 
     filmTable.innerHTML = "";
 
     for(const film of films){
         const trFilm = createFilmRow(film);
-        filmTable.prepend(trFilm);
+        filmTable.append(trFilm);
     }
 }
 
+
+function selectFilter(filter) {
+
+    const filterTitle = document.getElementById('selected-filter-title');
+    
+    filterTitle.innerText = `${filter}`;
+}
+
+
+//---CREA LISTA DI FILTRI---//
+function createFilter() {
+
+    const filterList = document.getElementById('select-filter-list');
+
+    for(let i=0; i<listItemsData.length; i++) { // per ogni filtro nella lista creo una "riga" nel list group
+        const liItem = document.createElement('li');
+        liItem.classList.add('list-group-item');
+
+        if(i == 0){
+            liItem.classList.add('active');
+        }
+
+        liItem.setAttribute('id', `${listItemsData[i]}`);
+        liItem.innerText = `${listItemsData[i]}`;
+        filterList.append(liItem);
+
+        liItem.addEventListener('click', event => {
+            filterList.querySelectorAll('.list-group-item').forEach(item => {   // per rimuovere l'active da tutte gli item
+                item.classList.remove('active');
+            });
+            liItem.classList.add('active');     // attivo solo l'item cliccato
+            liItem.replaceWith(liItem);
+            selectFilter(listItemsData[i]);
+        });
+    }
+    
+}
 
 function main() {
 
@@ -161,6 +248,8 @@ function main() {
     filmLib.addNewFilm(film5);
 
     fillFilmLibraryTable(filmLib);
+
+    createFilter();
 }
 
 
