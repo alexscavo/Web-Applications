@@ -1,6 +1,7 @@
 'use strict';
 
 let currentFilmId = 0;
+const filmLib = new FilmLibrary();
 /*
 ------DEFINIZIONE CLASSI------
 */
@@ -85,6 +86,24 @@ function FilmLibrary(){
             
             return 1;
         });
+    }
+
+    this.getFavourites = () => {
+
+        return [...this.filmArray].filter((film) => film.fav === true);
+    }
+
+    this.getBestRated = () => {
+
+        return [...this.filmArray].filter((film) => film.rating === 5);
+    }
+
+    this.seenLastMonth = () => {
+        return [...this.filmArray].filter((film) => dayjs(film.date).isAfter(dayjs().subtract(30, 'day')));
+    }
+
+    this.getUnseen = () => {
+        return [...this.filmArray].filter((film) => !dayjs(film.date).isValid());
     }
 }
 
@@ -183,11 +202,9 @@ function fillFilmLibraryTable(filmList) {    // data una lista di film crea la t
 
     const filmTable = document.getElementById('filter-table');
 
-    let films = filmList.getFilms();
-
     filmTable.innerHTML = "";
 
-    for(const film of films){
+    for(const film of filmList){
         const trFilm = createFilmRow(film);
         filmTable.append(trFilm);
     }
@@ -198,7 +215,33 @@ function selectFilter(filter) {
 
     const filterTitle = document.getElementById('selected-filter-title');
     
-    filterTitle.innerText = `${filter}`;
+    filterTitle.innerText = `${filter}`;    // scrivo il titolo del filtro
+
+    let selectedFilms = [];
+
+    switch(filter) {
+        case "All":
+            selectedFilms = [...filmLib.filmArray];
+            break;
+        case "Favourites":
+            selectedFilms = filmLib.getFavourites();
+            break;
+        case "Best Rated":
+            selectedFilms = filmLib.getBestRated();
+            break;
+        case "Seen Last Month":
+            selectedFilms = filmLib.seenLastMonth();
+            break;
+        case "Unseen":
+            selectedFilms = filmLib.getUnseen();
+            break;
+        default:
+            break;
+
+    }
+
+    fillFilmLibraryTable(selectedFilms);
+        
 }
 
 
@@ -234,12 +277,12 @@ function createFilter() {
 function main() {
 
     const film1 = new Film('Pulp Fiction', true, 'p1', '2024-03-10', 5);
-    const film2 = new Film('21 Grams', true, 'p1', '2024-03-17', 4);
+    const film2 = new Film('21 Grams', true, 'p1', '2024-03-30', 4);
     const film3 = new Film('Star Wars', false, 'p1', '', 0);
     const film4 = new Film('Matrix', false, 'p1', '', 0);
-    const film5 = new Film('Shrek', false, 'p1', '2024-03-21', 3);
+    const film5 = new Film('Shrek', false, 'p1', '2024-04-15', 3);
 
-    const filmLib = new FilmLibrary();
+    
 
     filmLib.addNewFilm(film1);
     filmLib.addNewFilm(film2);
@@ -247,7 +290,7 @@ function main() {
     filmLib.addNewFilm(film4);
     filmLib.addNewFilm(film5);
 
-    fillFilmLibraryTable(filmLib);
+    fillFilmLibraryTable(filmLib.filmArray);
 
     createFilter();
 }
