@@ -188,6 +188,8 @@ function createFilmRow(film) {  // crea una riga contenente il film
         tdButtons.appendChild(buttonDelete);
 
         buttonDelete.addEventListener('click', event => {   // quando viene cliccato elimina la riga corrispondente
+            console.log(`removing film ${film.filmId}`);
+            filmLib.deleteFilm(film.filmId);
             tr.remove();
         });
 
