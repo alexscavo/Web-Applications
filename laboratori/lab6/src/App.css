@@ -1,0 +1,21 @@
+#search-bar {
+    background-color:white;
+    border: none;
+}
+
+#search-bar::placeholder {
+    color: gray;
+}
+  
+#search-bar::-ms-input-placeholder { /* Edge 12 -18 */
+    color: gray;
+}
+
+#navbar-right-icon {
+    font-size: 1.55rem;
+}
+
+#left-list-group {
+    border-radius: 10px; /* Adjust the value as needed */
+    border-bottom-width: 0px !important;
+}   

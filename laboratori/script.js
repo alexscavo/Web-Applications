@@ -162,6 +162,7 @@ function createFilmRow(film) {  // crea una riga contenente il film
         for(let i=0; i<film.rating; i++){
             const iStarFill = document.createElement('i');
             iStarFill.classList.add('bi', 'bi-star-fill');
+            iStarFill.style.color = 'gold';
             tdRating.appendChild(iStarFill);
         }
 
