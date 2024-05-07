@@ -34,12 +34,24 @@ function App() {
     })
   }
 
+  const updateAnswer = (answer) => {
+    setAnswers(oldAnswers => {
+      return oldAnswers.map(ans => {
+        if(ans.id === answer.id)
+          // ritorno una nuova, aggiornata, risposta
+          return new Answer(answer.id, answer.text, answer.email, answer.date, answer.score);
+        else
+          return ans;
+      });
+    });
+  }
+
   return (
     <>
       <NavHeader questionNum={question.id} />
       <Container fluid className='mt-3'>
         <QuestionDescription question={question} />
-        <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer}></Answers>
+        <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer} updateAnswer={updateAnswer}></Answers>
       </Container>
     </>
   )
