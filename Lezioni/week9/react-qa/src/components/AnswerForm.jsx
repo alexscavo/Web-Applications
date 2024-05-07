@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import dayjs from 'dayjs';
 
-function AnswerForm() {
+function AnswerForm(props) {
   const [text, setText] = useState('');
   const [email, setEmail] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
 
   const handleSubmit = (event) => {
     
     event.preventDefault();   // per evitare il refresh
     // 1 - creare una nuova risposta
     const answer = {text, email, date};
-    
+
     // TODO: aggiungere delle validazioni sui campi
+
     // 2 - Aggiungere la nuova risposta allo stato
+    props.addAnswer(answer);
   }
 
   return(
@@ -30,7 +34,7 @@ function AnswerForm() {
         <Form.Label>Date</Form.Label>
         <Form.Control type="date" value={date} onChange={(event) => setDate(event.target.value)}></Form.Control>
       </Form.Group>
-      <Button variant='primary' type='Submit'>Add</Button> <Button variant='danger'>Cancel</Button>
+      <Button variant='success' type='Submit'>Add</Button> <Button variant='danger' onClick={props.cancel}>Cancel</Button>
     </Form>
   );
 }
