@@ -1,4 +1,5 @@
-import { Table, Row, Col } from "react-bootstrap";
+import { Table, Row, Col, InputGroup, Form } from "react-bootstrap";
+import ReactStars from "react-rating-stars-component";
 
 
 function FilmList(props) {
@@ -36,12 +37,13 @@ function FilmRow(props) {
 }
 
 function FilmData(props) {
-    
+
     return(
         <>
           <td>{props.film.title}</td>
-          <td>{props.film.fav}</td>
-          <td>{props.film.date.format('YYYY-MM-DD')}</td>
+          <td><Form.Check inline label="Favourite" checked={props.film.fav} readOnly/></td>
+          <td>{props.film.date.isValid() ? props.film.date.format('YYYY-MM-DD') : ''}</td>
+          <td><ReactStars count={5} readOnly size={24} activeColor="#ffd700" /></td>
         </>
       );
 }
