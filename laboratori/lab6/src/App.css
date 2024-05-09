@@ -17,5 +17,21 @@
 
 #left-list-group {
     border-radius: 10px; /* Adjust the value as needed */
-    border-bottom-width: 0px !important;
+    border-width: 0px !important;
 }   
+
+.list-group-item {
+    border-radius: 10px; /* Adjust the value as needed */
+    border-width: 0px !important;
+}   
+
+.list-group-item.active {
+    background-color: #125B9A;
+} 
+
+
+.right-aligned {
+    text-align: right;
+}
+
+
