@@ -6,7 +6,7 @@ import {Film, FilmLibrary} from './FilmModels.mjs';
 import NavHeader from './assets/NavHeader';
 import FilterList from './assets/FilterList';
 import FilmList from './assets/FilmList';
-import { Col, Container, ListGroup, Row} from 'react-bootstrap';
+import { Col, Container, ListGroup, Row, Button} from 'react-bootstrap';
 
 const filmLibrary = new FilmLibrary();
 
@@ -59,19 +59,22 @@ function App() {
   }
 
   return (
-    <>
+    <div className="min-vh-100 d-flex flex-column">
       <NavHeader /> 
       <Container fluid className='mt-3'>
         <Row>
-        <Col sm='3'>
-          <FilterList selectFilter={selectFilter}/>
-        </Col>
-        <Col sm='9'>
-          <FilmList filterType={filter} filmList={films}/>
-        </Col>
+			<Col sm='3'>
+			<FilterList selectFilter={selectFilter}/>
+			</Col>
+			<Col sm='9'>
+			<FilmList filterType={filter} filmList={films}/>
+			</Col>
         </Row>
+		<Button variant="primary" className="rounded-circle fixed-right-bottom" >
+			<i className="bi bi-plus"></i>
+		</Button>
       </Container>  
-    </>
+	  </div>
   );
 }
 
