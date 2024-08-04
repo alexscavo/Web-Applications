@@ -59,3 +59,17 @@ function App() {
 }
 
 export default App;
+
+
+
+/*
+AnswersPage -> /questions/:questionId/answers
+AddAnswer -> /questions/:questionId/answers/new
+EditAnswer -> /questions/:questionId/answers/:answerId/edit
+
+AddQuestion -> /questions/add
+EditQuestion -> /questions/:questionId/edit
+questionsPage -> /questions o anche solo /
+
+404NotFound -> *
+*/
