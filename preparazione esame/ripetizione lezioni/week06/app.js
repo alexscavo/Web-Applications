@@ -1,3 +1,6 @@
+'use strict';
+
+let sortingOrd = "asc";
 
 function Answer(id, text, email, date, score = 0) {
     this.id = id;
@@ -82,24 +85,30 @@ function createAnswerRow(answer) {
     
     const buttonVote = document.createElement('button');
     buttonVote.classList.add('btn', 'btn-warning');
-    buttonVote.innerHTML = "<i class='bi bi-arrow-up'></i>"
-   
-    const buttonDelete = document.createElement('button');
-    buttonDelete.classList.add('btn', 'btn-danger');
-    buttonDelete.innerHTML = "<i class='bi bi-trash'></i>"
+    buttonVote.innerHTML = "<i class='bi bi-arrow-up'></i>";
+
+    buttonVote.addEventListener('click', (event) => {
+        tdScore.innerText = Number(tdScore.innerText) + 1 ;
+        answer.score = answer.score + 1;
+    });
 
     const buttonEdit = document.createElement('button');
     buttonEdit.classList.add('btn', 'btn-primary', 'mx-1');
-    buttonEdit.innerHTML = "<i class='bi bi-pencil-square'></i>"
+    buttonEdit.innerHTML = "<i class='bi bi-pencil-square'></i>";
    
-   
+    const buttonDelete = document.createElement('button');
+    buttonDelete.classList.add('btn', 'btn-danger');
+    buttonDelete.innerHTML = "<i class='bi bi-trash'></i>";
+
+    buttonDelete.addEventListener('click', (event) => {
+        tr.remove();
+    });
+
     tdActions.appendChild(buttonVote);
     tdActions.appendChild(buttonEdit);
     tdActions.appendChild(buttonDelete);
 
-
     tr.appendChild(tdActions);
-
 
     return tr;
 }
@@ -108,6 +117,7 @@ function createAnswerRow(answer) {
 function fillAnswersTable(answers) {
 
     const answersTable = document.getElementById('answers-table');
+    answersTable.innerHTML = "";
 
     for(const answer of answers) {
         const tableRowAnswer = createAnswerRow(answer);
@@ -115,12 +125,38 @@ function fillAnswersTable(answers) {
     }
 }
 
+function addSortListener(answers) {
+    const sortScoreIcon = document.getElementById('sort-score');
+
+    sortScoreIcon.addEventListener('click', (event) => {
+        const sortedAnswres = [...answers];
+
+        if(sortingOrd == "asc") {
+            sortedAnswres.sort((a, b) => a.score - b.score);
+            sortingOrd = "desc";
+            sortScoreIcon.classList.remove("bi-sort-numeric-down-alt");
+            sortScoreIcon.classList.add("bi-sort-numeric-up");
+        }
+        else {
+            sortedAnswres.sort((a, b) => b.score - a.score);
+            sortingOrd = "asc";
+            sortScoreIcon.classList.remove("bi-sort-numeric-up");
+            sortScoreIcon.classList.add("bi-sort-numeric-down-alt");
+        }
+
+        
+        fillAnswersTable(sortedAnswres);
+    });
+}
+
+
 function main() {
     const question = new Question(1, 'Is JS better than Python?', 'alex.scavone@hotmail.it', '2024-02-27');
     question.init();
     const answers = question.getAnswers();
     
     fillAnswersTable(answers);
+    addSortListener(answers);
 }
 
 main();
