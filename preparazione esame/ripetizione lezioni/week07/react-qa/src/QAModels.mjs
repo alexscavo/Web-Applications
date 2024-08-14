@@ -25,10 +25,10 @@ function Question(id, text, email, date) {
 
     this.init = () => {
         this.answers = [
-            new Answer(1, 'Yes', 'Luca Mannella', '2024-04-28', -10),
-            new Answer(2, 'No', 'Miriam Luchetti', '2024-04-28', 5),
-            new Answer(3, 'Maybe', 'Andrea Gnani', '2024-04-28', 1),
-            new Answer(4, 'Do not know', 'Luca Marenti', '2024-04-28', 0)
+            new Answer(1, 'Yes', 'luca.mannella@gmail.it', '2024-04-28', -10),
+            new Answer(2, 'No', 'miriam.luchetti19@gmail.com', '2024-04-28', 5),
+            new Answer(3, 'Maybe', 'andrea.gnani@gmail.com', '2024-04-28', 1),
+            new Answer(4, 'Do not know', 'luca.manenti@gmail.com', '2024-04-28', 0)
         ];
     }
 }

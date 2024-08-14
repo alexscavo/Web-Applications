@@ -29,12 +29,27 @@ function App() {
         });
     }
 
+    const deleteAns = (answerId) => {
+        setAnswers(oldAnswers => {
+            return oldAnswers.filter((ans) => ans.id != answerId);
+        });
+    }
+
+    const addAnswer = (answer) => {
+        setAnswers(oldAnswers => {
+            const newId = Math.max(...oldAnswers.map(ans => ans.id)) + 1;
+            const newAnswer = new Answer(newId, answer.text, answer.email, answer.date, 0);
+
+            return [...oldAnswers, newAnswer];
+        });
+    }
+
     return (
         <>
             <NavHeader questionNum = {question.id} />
             <Container fluid className = 'mt-3'>
                 <QuestionDescription question={question} />
-                <Answers answers={answers} voteUp={voteUp}/>
+                <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer} deleteAns={deleteAns} />
             </Container>
         </>
     )

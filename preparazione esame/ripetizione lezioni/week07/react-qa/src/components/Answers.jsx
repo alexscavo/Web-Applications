@@ -1,8 +1,11 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Button, Row, Table, Col } from 'react-bootstrap';
-import FormAnswer from './FormAnswer';
+import React, {useState} from 'react';
+import AnswerForm from './AnswerForm';
 
 function Answers(props) {
+
+    const [mode, setMode] = useState('view');
 
     return(
     <>
@@ -11,8 +14,13 @@ function Answers(props) {
         </Row>
         <Row>
             <Col lg={10} className = 'mx-auto'>
-                <AnswerTable answers={props.answers} voteUp={props.voteUp} />
-                <FormAnswer />
+                <AnswerTable answers={props.answers} voteUp={props.voteUp} deleteAns={props.deleteAns} />
+                {mode === 'view' && <Button variant='primary' onClick={() => {setMode('add');}}>Add</Button> }
+                {mode === 'add' && <AnswerForm addAnswer={(answer) => {
+                    props.addAnswer(answer);
+                    setMode('view');
+                }} 
+                cancel={() => setMode('view')} />}
             </Col>
         </Row>
     </>);
@@ -32,7 +40,7 @@ function AnswerTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    { props.answers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} />) }
+                    { props.answers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} deleteAns={props.deleteAns} />) }
                 </tbody>
             </Table>
         </>
@@ -42,7 +50,7 @@ function AnswerTable(props) {
 function AnswerRow(props) {
     return(
         <>
-            <tr><AnswerData answer={props.answer} /><AnswerAction answerId={props.answer.id} voteUp={props.voteUp} /></tr>
+            <tr><AnswerData answer={props.answer} /><AnswerAction answerId={props.answer.id} voteUp={props.voteUp} deleteAns={props.deleteAns} /></tr>
         </>
     )
 }
@@ -64,7 +72,7 @@ function AnswerAction(props) {
             <td>
                 <Button variant='warning' onClick={() => props.voteUp(props.answerId)}><i className='bi bi-arrow-up'></i></Button>
                 <Button variant='primary' className='mx-1'><i className='bi bi-pencil-square'></i></Button>
-                <Button variant='danger'><i className='bi bi-trash'></i></Button>
+                <Button variant='danger' onClick={() => props.deleteAns(props.answerId)}><i className='bi bi-trash'></i></Button>
             </td>
         </>
     )
