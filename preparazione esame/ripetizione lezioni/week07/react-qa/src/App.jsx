@@ -21,7 +21,7 @@ function App() {
         setAnswers(oldAnswers => {
             
             return oldAnswers.map((ans) => {
-                if(ans.id == answerId)
+                if(ans.id === answerId)
                     return new Answer(ans.id, ans.text, ans.email, ans.date, ans.score + 1);
                 else
                     return ans;
@@ -44,12 +44,40 @@ function App() {
         });
     }
 
+    const updateAnswer = (answer) => {
+        setAnswers(oldAnswers => {
+            return oldAnswers.map((ans) => {
+                if(ans.id === answer.id){
+                    return new Answer(ans.id, answer.text, answer.email, answer.date, ans.score);
+                }
+                else {
+                    return ans;
+                }
+            });
+        });
+    }
+
+    const sortAnswers = (order) => {
+        setAnswers(oldAnswers => {
+            const sortedAnswers = [...oldAnswers];
+
+            if(order === 'asc') {
+                sortedAnswers.sort((a, b) => a.score - b.score);
+            }
+            else {
+                sortedAnswers.sort((a, b) => b.score - a.score);
+            }
+            
+            return sortedAnswers;
+        });
+    }
+
     return (
         <>
             <NavHeader questionNum = {question.id} />
             <Container fluid className = 'mt-3'>
                 <QuestionDescription question={question} />
-                <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer} deleteAns={deleteAns} />
+                <Answers answers={answers} voteUp={voteUp} sortAnswers={sortAnswers} addAnswer={addAnswer} updateAnswer={updateAnswer} deleteAns={deleteAns} />
             </Container>
         </>
     )

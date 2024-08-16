@@ -4,9 +4,9 @@ import dayjs from 'dayjs';
 
 function AnswerForm(props) {
 
-    const [text, setText] = useState('');
-    const [email, setEmail] = useState('');
-    const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
+    const [text, setText] = useState(props.answer ? props.answer.text : '');
+    const [email, setEmail] = useState(props.answer ? props.answer.email : '');
+    const [date, setDate] = useState(props.answer ? props.answer.date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'));
 
     const handleSubmit = (event) => {
         event.preventDefault();     // serve a prevenire il comportamento di default
@@ -15,9 +15,13 @@ function AnswerForm(props) {
         const answer = {text, email, date}
 
         // todo: aggiungere delle validazioni su questi campi
+        if(props.mode === 'edit') {
+            props.updateAnswer({id: props.answer.id, ...answer});   
+        }
+        else {
+            props.addAnswer(answer);
+        }
         
-        //aggiungere la risposta allo stato
-        props.addAnswer(answer);
     }
 
     return(
@@ -35,7 +39,8 @@ function AnswerForm(props) {
                     <Form.Label>Date</Form.Label>
                     <Form.Control type='date' value={date} onChange={(event) => setDate(event.target.value)}></Form.Control>
                 </Form.Group>
-                <Button variant='success' type='submit'>Add</Button>
+                {props.mode === 'add' && <Button variant='success' type='submit'>Add</Button>}
+                {props.mode === 'edit' && <Button variant='success' type='submit'>Update</Button>}
                 <Button variant='danger' className='ms-1' onClick={props.cancel}>Cancel</Button>
             </Form>
         </>
