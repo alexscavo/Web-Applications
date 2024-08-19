@@ -1,55 +1,98 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {Row, Col} from 'react-bootstrap';
-import {Link, useLocation} from 'react-router-dom';
-import Answers from './Answers.jsx';
-import AnswerForm from './AnswerForm.jsx';
+import { Col, Row } from 'react-bootstrap';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import API from '../API.mjs';
+
+import Answers from './AnswerComponent';
+import AnswerForm from './AnswerForm';
 
 export function QuestionLayout(props) {
+
+    const [answers, setAnswers] = useState([]);
+
+    const params = useParams();
+    const question = props.questions[params.questionId - 1];
+
+    useEffect(() => {
+        const getAnswers = async () => {
+            const answers = await API.getAnswers(params.questionId);
+            setAnswers(answers);
+        }
+        getAnswers();
+    }, []);  // TODO: aggiungere dipendenza da answers
+
+    
+    const voteUp = (answerId) => {
+        setAnswers(oldAnswers => {
+          return oldAnswers.map(ans => {
+            if(ans.id === answerId)
+              // ritorno una nuova, aggiornata, risposta
+              return new Answer(ans.id, ans.text, ans.email, ans.date, ans.score +1);
+            else
+              return ans;
+          });
+        });
+      }
+        
     return(
         <>
-        <QuestionDescription question={props.question} />
-        <Answers answers={props.answers} voteUp={props.voteUp} sortAnswers={props.sortAnswers} addAnswer={props.addAnswer} updateAnswer={props.updateAnswer} deleteAns={props.deleteAns} />
+        {/* The check on "question" is needed to intercept errors due to invalid URLs (e.g., /questions/5 when you have two questions only) */}
+        {question ? <>
+        <QuestionDescription question={question} />
+        <Answers answers={answers} voteUp={voteUp}></Answers></> :
+        <p className='lead'>The selected question does not exist!</p>
+        } 
         </>
     );
 }
 
 export function AddEditQuestionLayout(props) {
-
+  const { questionId } = useParams();
+  const question = props.questions[questionId-1];
+    
+  let editableAnswer = undefined;
+  if(props.mode === 'edit') {
     const location = useLocation();
-    const editableAnswer = location.state;
-
-    if(props.mode === 'edit' && !editableAnswer){
-        return(
-            <>
-            <p className='lead'>Error: edit mode not available! Please go back to the answer you want to edit and try again</p>
-            <Link className='btn btn-danger' to={'../..'} relative='path'>Back to the question</Link>
-            </>
-        );
+    editableAnswer = location.state;
+  }
+  
+  return(
+  <>
+    <QuestionDescription question={question} />
+    <Row>
+      <Col md={6} as='p'>
+        <strong>Answer:</strong>
+      </Col>
+    </Row>
+    { 
+    props.mode === 'edit' && !editableAnswer ?
+      <Row>
+        <Col md={6}>
+          <p>Answer not found!</p>
+          <Link className='btn btn-danger' to='../../' relative='path'>Go back</Link>
+        </Col>
+      </Row>
+      : <AnswerForm mode={props.mode} answer={editableAnswer} addAnswer={props.addAnswer} updateAnswer={props.updateAnswer}/>
     }
-
-    return(
-        <>
-        <QuestionDescription question={props.question} />
-        <AnswerForm mode={props.mode} addAnswer={props.addAnswer} updateAnswer={props.updateAnswer} answer={editableAnswer}/>
-        </>
-    );
+  </>
+  );
 }
- 
-function QuestionDescription(props) {
-    return(
-        <>
-            <Row>
-                <Col md={6} as='p'>
-                <strong>Question #{props.question.id}:</strong>
-                </Col>
-                <Col md={6} as='p' className='text-end'>
-                Asked by: <span className='badge rounded-pill text-bg-secondary'>{props.question.email}</span>
-                </Col>
-            </Row>
-            <Row>
-                <Col as='p' className='lead'>{props.question.text}</Col>
-            </Row>
-        </>
-    )
+
+function QuestionDescription (props) {
+  return(
+    <>
+      <Row>
+        <Col md={6} as='p'>
+          <strong>Question #{props.question.id}:</strong>
+        </Col>
+        <Col md={6} as='p' className='text-end'>
+          Asked by <span className='badge rounded-pill text-bg-secondary'>{props.question.email}</span>
+        </Col>
+      </Row>
+      <Row>
+        <Col as='p' className='lead'>{props.question.text}</Col>
+      </Row>
+    </>
+  );
 }
