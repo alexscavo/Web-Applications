@@ -12,10 +12,12 @@ const port = 3001;
 // middleware
 app.use(express.json());
 app.use(morgan('dev'));
+
 // set up and enable CORS
 const corsOptions = {
   origin: 'http://localhost:5173',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  credentials: true   // serve al server per capire che può accettare i cookies anche se arrivano da un'altra origine
 };
 app.use(cors(corsOptions));
 
