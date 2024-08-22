@@ -3,6 +3,7 @@
 
 import sqlite from 'sqlite3';
 import { Question, Answer } from './QAModels.mjs';
+import {db} from './db.mjs';
 
 // open the database
 const db = new sqlite.Database('questions.sqlite', (err) => {
