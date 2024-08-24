@@ -1,0 +1,74 @@
+## Add a new film
+POST http://localhost:3001/api/films HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Guardiani della galassia",
+    "favourite": false,
+    "watchDate": "2024-05-10",
+    "rating": 2,
+    "userId": 1
+}
+###
+
+## Add a new film - failure
+POST http://localhost:3001/api/films HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Guardiani della galassia",
+    "favourite": false,
+    "watchDate": "20240510abv",
+    "rating": 1,
+    "userId": 3
+}
+###
+
+## Add a new film - wrong user
+POST http://localhost:3001/api/films HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Guardiani della galassia",
+    "favourite": false,
+    "rating": 1,
+    "userId": 12
+}
+###
+
+
+## update a film informations
+PUT http://localhost:3001/api/films/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Matrix",
+    "favourite": false,
+    "rating": 1,
+    "watchDate": "2024-08-23",
+    "userId": 1
+}
+###
+
+ 
+## update a film rating
+PUT http://localhost:3001/api/films/4/rating HTTP/1.1
+Content-Type: application/json
+
+{
+    "rating": 2
+}
+###
+
+## update a film favourite
+PUT http://localhost:3001/api/films/4/favourite HTTP/1.1
+Content-Type: application/json
+
+{
+    "favourite": true
+}
+###
+
+## delete a film
+DELETE http://localhost:3001/api/films/7 HTTP/1.1
+###
