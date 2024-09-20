@@ -1,0 +1,164 @@
+## Add a new Draw
+POST http://localhost:3001/api/draws HTTP/1.1
+Content-Type: application/json
+
+{
+    "n1": 10,
+    "n2": 20,
+    "n3": 30,
+    "n4": 40,
+    "n5": 50,
+    "timeStamp": "2024-08-26,20:08:30"
+}
+###
+
+
+## Get a draw
+GET http://localhost:3001/api/draws/1 HTTP/1.1
+Content-Type: application/json
+###
+
+
+## login
+POST http://localhost:3001/api/sessions HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "mario.rossi@polito.it",
+    "password": "provaprova"
+}
+###
+
+## login
+GET http://localhost:3001/api/sessions/current HTTP/1.1
+
+###
+
+## get remaining time before next extraction
+GET http://localhost:3001/api/draws/time-remaining HTTP/1.1
+Content-Type: application/json
+###
+
+## test timer server side
+GET http://localhost:3001/api/poll HTTP/1.1
+Content-Type: application/json
+###
+
+## Add a new Bet
+POST http://localhost:3001/api/bets HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "drawId": 2,
+    "n1": 10,
+    "n2": 20,
+    "n3": 50,
+    "usedPoints": 15,
+    "wonPoints": 0,
+    "timeStamp": "2024-08-26,20:08:30"
+}
+###
+
+## update a Bet
+PUT http://localhost:3001/api/bets/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "drawId": 1,
+    "n1": 10,
+    "n2": 20,
+    "n3": 30,
+    "usedPoints": 15,
+    "wonPoints": 0
+}
+###
+
+## test getAvailablePoints
+GET http://localhost:3001/api/users/1/points HTTP/1.1
+###
+
+## update a Bet
+PUT http://localhost:3001/api/users/1/points HTTP/1.1
+Content-Type: application/json
+
+{
+    "points": 80
+}
+###
+
+## test get top 3 users
+GET http://localhost:3001/api/users/top3 HTTP/1.1
+###
+
+
+## test fallimento della PUT sull'id
+PUT http://localhost:3001/api/bets/kscn HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "drawId": 1,
+    "n1": 10,
+    "n2": 20,
+    "n3": 30,
+    "usedPoints": 15,
+    "wonPoints": 0
+}
+###
+
+## test fallimento della PUT su n1/n2/n3
+PUT http://localhost:3001/api/bets/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "drawId": 1,
+    "n1": 1,
+    "n2": 20,
+    "n3": 25,
+    "usedPoints": 13,
+    "wonPoints": 0
+}
+###
+
+## checks for a new Bet
+POST http://localhost:3001/api/bets HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "drawId": 6,
+    "n1": 10,
+    "n2": 20,
+    "n3": 23,
+    "usedPoints": 15,
+    "wonPoints": -1
+}
+###
+
+
+## test get bet
+GET http://localhost:3001/api/users/1/bets/500 HTTP/1.1
+###
+
+
+## test fallimento put per aggiornamento punti user
+PUT http://localhost:3001/api/users/-1/points HTTP/1.1
+Content-Type: application/json
+
+{
+    "points": 80
+}
+###
+
+## test get draw
+GET http://localhost:3001/api/users/10/points HTTP/1.1
+###
+
+
+
+## test get draw
+GET http://localhost:3001/api/draws/lastDraw HTTP/1.1
+###

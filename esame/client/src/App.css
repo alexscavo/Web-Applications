@@ -1,0 +1,387 @@
+/* -------------- */
+/* --- NAVBAR --- */
+/* -------------- */
+.navbar {
+    background-color: #0c0f3d;
+}
+
+#login-logout-button-navbar {
+    color: #F97300;
+    border-color: #F97300;
+}
+
+#login-logout-button-navbar:hover {
+    color: #0c0f3d;
+    background-color: #F97300;
+}
+
+#login-button-form {
+    background-color: #F97300;
+    border-color: #F97300;
+    color: #0c0f3d;
+}
+
+/* login button form */
+#login-button-form:hover {
+    color: #E2DFD0;
+    border-color: #0c0f3d;
+}
+
+/* ----------------- */
+/* --- USER ICON --- */
+/* ----------------- */
+#user-icon {
+    color: #F97300;
+}
+
+
+/* ------------------ */
+/* --- GAME RULES --- */
+/* ------------------ */
+#game-rules {
+    background-color: rgb(110, 172, 218, .2);
+}
+
+
+/* -------------------- */
+/* --- NUMBERS GRID --- */
+/* -------------------- */
+
+/* numbers to play grid */
+#container-esterno {
+    background-color: #0c0f3d;
+    max-width: 60%;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 1500px) {  
+    #container-esterno {
+        max-width: 80%;
+    }
+}
+@media (max-width: 1115px) {  
+    #container-esterno {
+        max-width: 95%;
+    }
+}
+
+.numbers-grid-container {
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+#col-grid {
+    margin-left: 3px;
+    margin-right: 3px
+}
+  
+.circle {
+    width: 28px;
+    height: 28px;
+    background-color: white;
+    color: #ff6600;
+    border: 2px solid #ff6600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.circle:hover {
+    border-color: #F97300;
+}
+  
+.circle.selected {
+    background-color: #ff6600;
+    color: white;
+}
+
+.play-button {
+    background-color: #F97300;
+    font-weight: bold;  
+    border-color: #0c0f3d;
+    color: #0c0f3d;
+    padding: 10px 20px;
+    font-size: 1.1rem;  
+    transition: all 0.3s ease;  
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
+}
+
+.play-button:hover {
+    background-color: #FF8500;  
+    border-color: #FF8500;  
+    color: #E2DFD0;  
+    box-shadow: 0px 8px 30px rgba(255, 194, 121, 0.3); 
+    transform: translateY(-3px); /* movimento verso l'alto quando ci si passa sopra */
+    transition: all 0.3s ease;  /* transizione bottone */
+}
+
+.play-button:active, .play-button.active {
+    background-color: #D96800 !important;
+    border-color: #D96800 !important;
+    color: #E2DFD0 !important; 
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2); /* al click un po' piu' chiaro */
+    transform: translateY(0);  /* riposiziona a 0 quando cliccato */
+}
+
+.play-button.disabled, .play-button:disabled {
+    background-color: #F97300 !important;
+    border-color: #F97300 !important; 
+    color: #E2DFD0 !important;
+    box-shadow: none; /* nessuna ombra se disabilitato */
+    transform: none; /* nessun movimento se disabilitato */
+}
+
+
+#bet-points {
+    max-width: 90%;
+}
+
+
+/* -------------------------- */
+/* --- EXTRACTION RESULTS --- */
+/* -------------------------- */
+
+
+.ball {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #F97300; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+    margin: 20px auto;
+}
+
+.green-ball {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #557C56; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+    margin: 20px auto;
+}
+
+.navigation-button {
+    background-color: #0c0f3d;       
+    border-color: #0c0f3d;           
+    color: #F97300;                  
+    padding: 10px 20px;            
+    font-size: 1.1rem;           
+    font-weight: bold;               
+    transition: all 0.3s ease;       
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.navigation-button:hover { 
+    background-color: #0c0f3d;       
+    border-color: #0c0f3d;      
+    color: #E2DFD0;      
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4); 
+    transform: translateY(-3px);     
+    transition: all 0.3s ease;       
+}
+
+.navigation-button:active {
+    background-color: #0f134b;      
+    border-color: #0f134b;           
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);  
+    transform: translateY(0);        
+}
+
+  
+.card-results {
+    border: none
+}
+
+#spinner {
+    color: #0c0f3d;
+}
+
+
+/* ------------------- */
+/* --- LEADERBOARD --- */
+/* ------------------- */
+
+
+/* Container esterno */
+#leaderboard-container {
+    background-color: #0c0f3d;
+    border-radius: 10px;
+    max-width: 47% ;
+    padding: 1rem;
+}
+
+/* ListGroup */
+#leaderboard-list {
+    border: none;
+}
+
+/* ListGroup.Item */
+.leaderboard-row {
+    font-weight: bold; 
+    border: none;
+    border-radius: 8px; 
+    margin-bottom: 1rem; 
+    font-size: 1.7rem;
+}
+
+
+@media (max-width: 1500px) {  
+    #leaderboard-container {
+        max-width: 60%;
+        padding: 0.5rem; 
+    }
+}
+
+@media (max-width: 1130px) {  
+    #leaderboard-container {
+        max-width: 85%;
+        padding: 0.5rem; 
+    }
+}
+
+@media (max-height: 780px) {  
+    #leaderboard-container {
+        padding: 0.5rem; 
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+    #page {
+        margin-top: 10px !important;
+    }
+    #container-esterno {
+        margin-top: 13px !important;
+    }
+    #play-button-row {
+        margin-top: 0px !important;
+    }
+    #play-button-col {
+        margin-top: 0px !important;
+    }
+    #div-balls {
+        margin-top: 13px !important;
+    }
+}
+
+.bi {
+    font-size: 2.5rem;
+}
+
+#icon-1 {
+    color: #ffbb00;
+}
+
+#icon-2 {
+    color: #929292;
+}
+
+#icon-3 {
+    color: #be6f1f;
+}
+
+#button-play {
+    width: 130px;
+}
+
+
+
+/* ----------------- */
+/* --- NOT FOUND --- */
+/* ----------------- */
+
+#notfound-image {
+    max-width: 30%;
+}
+
+
+@media (max-width: 1500px) {  
+    #notfound-image {
+        max-width: 40%;
+    }
+}
+
+@media (max-height: 780px) {  
+    #notfound-image {
+        max-width: 20%;
+    }
+}
+
+
+
+/* ---------------- */
+/* --- CAROUSEL --- */
+/* ---------------- */
+.custom-carousel {
+    border: 2px solid #ddd; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);  /*uso due ombre diverse per dare piu' profondita'*/
+    border-radius: 10px;
+    overflow: hidden; 
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+@media (max-height: 780px) {  
+    .custom-carousel img {
+        max-height: 540px;
+    }
+
+    #container-home {
+        margin-top: 10px !important;
+    }
+
+
+    .custom-carousel .carousel-caption {
+        font-size: 0.9rem; 
+        padding-top: 5px;  
+        padding-bottom: 5px; 
+    }
+
+    .custom-carousel .carousel-caption h3 {
+        font-size: 1.2rem; 
+    }
+
+    .custom-carousel .carousel-caption p {
+        font-size: 0.85rem;
+    }
+}
+
+.custom-carousel img {
+    border-radius: 10px; /* anche le immagini hanno i bordi arrotondati uguali al carousel */
+}
+
+.custom-carousel .carousel-control-prev-icon,
+.custom-carousel .carousel-control-next-icon {
+    filter: invert(1); /* per visualizzare le frecce del carousel come scure */
+}
+
+.custom-carousel .carousel-caption {
+    background-color: rgb(110, 172, 218, .25); 
+    color: black;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+.custom-carousel .carousel-indicators .active {
+    background-color: #0c0f3d; 
+}
